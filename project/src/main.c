@@ -24,7 +24,7 @@ void state_machine() {
             buzzer_off();
             break; */
         case STATE_SONG:
-            buzzer_set_period(2000);
+            play_song();
             led_off();
             break;
         case STATE_OFF:
