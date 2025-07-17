@@ -2,6 +2,18 @@
 #include "libTimer.h"
 #include "buzzer.h"
 
+int melody[] = { /*  MMPR Morpher Melody: E6, E6, D6, E6, G6, E6, Rest */
+  NOTE_E6, NOTE_E6, NOTE_D6,
+  NOTE_E6, NOTE_G6, NOTE_E6,
+  NOTE_REST
+};
+
+int durations[] = {
+  1, 1, 2,
+  3, 1, 1,
+  4
+};
+
 void buzzer_init()
 {
     /* 
@@ -26,4 +38,30 @@ void buzzer_set_period(short cycles) /* buzzer clock = 2MHz.  (period of 1k resu
 
 void buzzer_off() {
     buzzer_set_period(0);
+}
+
+void delay_ms(int ms) {
+  while (ms--) {
+    __delay_cycles(2000);  /* 1 ms delay @ 2 MHz */
+  }
+}
+
+
+void play_song() {
+  int notes = sizeof(melody) / sizeof(melody[0]);
+
+  for (int i = 0; i < notes; i++) {
+    int note = melody[i];
+    int duration = 750 / durations[i];  /* ms */
+
+    if (note == NOTE_REST) {
+      buzzer_set_period(0);
+    } else {
+      buzzer_set_period(note);
+    }
+
+    delay_ms(duration);
+    buzzer_set_period(0);   /* pause between notes */
+    delay_ms(1500);
+  }
 }
