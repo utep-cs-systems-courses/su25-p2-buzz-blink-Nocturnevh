@@ -9,12 +9,16 @@ void led_init()
     P1OUT |= LED_RED;
 }
 
+void led_off(){
+    P1OUT &= ~LEDS;
+}
+
 int secondCount = 0;
 void alternate_leds(){
     secondCount ++;
     if (secondCount >= 250) { 	/* once each sec... */
-      secondCount = 0;		/* reset count */
-      P1OUT ^= LEDS;                    /* toggle LEDS */
+      secondCount = 0;		    /* reset count */
+      P1OUT ^= LEDS;            /* toggle LEDS */
     }
 }
 

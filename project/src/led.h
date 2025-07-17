@@ -6,6 +6,7 @@
 #define LEDS (BIT0 | BIT6)
 
 void led_init();
+void led_off();
 void alternate_leds();
 
 #endif // included
