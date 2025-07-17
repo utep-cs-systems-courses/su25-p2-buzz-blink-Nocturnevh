@@ -16,16 +16,16 @@ State current_state = STATE_OFF;
 void state_machine() {
     switch (current_state) {
         case STATE_ALT_LED:
-            alternate_leds();
             buzzer_off();
+            alternate_leds();
             break;
        /*case STATE_BLINK_LED:
             blink_led();
             buzzer_off();
             break; */
         case STATE_SONG:
-            play_song();
             led_off();
+            play_song();
             break;
         case STATE_OFF:
             led_off();
