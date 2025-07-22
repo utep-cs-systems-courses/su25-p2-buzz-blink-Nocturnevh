@@ -22,3 +22,27 @@ void alternate_leds(){
     }
 }
 
+int sCount = 0;
+int blinkLimit = 5;
+int blinkCount = 0;
+
+void blink_leds(){
+  blinkCount ++;
+  if (blinkCount >= blinkLimit) {
+    blinkCount = 0;
+    P1OUT |= LED_RED ;
+    P1OUT &= ~LED_GREEN;
+  }
+  else{
+    P1OUT &= ~LED_RED;
+    P1OUT |= LED_GREEN;
+  }
+
+  sCount ++;
+  if (sCount >= 250) {
+    sCount = 0;
+    blinkLimit ++;
+    if (blinkLimit >= 8)
+      blinkLimit = 0;
+  }
+} 

@@ -8,5 +8,6 @@
 void led_init();
 void led_off();
 void alternate_leds();
+void blink_leds();
 
 #endif // included
