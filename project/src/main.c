@@ -17,12 +17,13 @@ void state_machine() {
     switch (current_state) {
         case STATE_ALT_LED:
             buzzer_off();
+	    led_init();
             alternate_leds();
             break;
-       /*case STATE_BLINK_LED:
-            blink_led();
+        case STATE_BLINK_LED:
+            blink_leds();
             buzzer_off();
-            break; */
+            break;
         case STATE_SONG:
             led_off();
             play_song();
@@ -74,5 +75,8 @@ __interrupt_vec(WDT_VECTOR) WDT()	/* 250 interrupts/sec */
 {
   if(current_state == STATE_ALT_LED){
     alternate_leds();
+  }
+  if(current_state == STATE_BLINK_LED){
+    blink_leds();
   }
 } 
