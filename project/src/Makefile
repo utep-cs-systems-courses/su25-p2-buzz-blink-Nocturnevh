@@ -17,6 +17,13 @@ main.elf: ${COMMON_OBJECTS} main.o switches.o led.o buzzer.o ../lib/libTimer.a
 load: main.elf
 	msp430loader.sh $^
 
+
+main-s.elf: ${COMMON_OBJECTS} main.o switches.o led.o buzzer.o ../lib/libTimer.a
+	${CC} ${CFLAGS} ${LDFLAGS} -o $@ $^
+
+load-s: main-s.elf
+	msp430loader.sh $^
+
 clean:
 	rm -f *.o *.elf
 
